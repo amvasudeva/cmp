@@ -1,0 +1,229 @@
+<!-- Welcome [% # user_name %] <a href="/logout">logout</a -->
+<html lang="en">
+<head>
+  <title>WIPRO-CMP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+
+
+h2 {
+    float: right;
+}
+img {
+    margin: 0 0 1px 1px;
+    float: left;
+}
+select.icon-menu option {
+background-repeat:no-repeat;
+background-position:bottom left;
+padding-left:30px;
+}
+</style>
+
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div>Welcome <strong>[% user.last_name%],[% user.first_name %]</strong><a style='float:right' href='/logout'>Logout</a></div>
+        <div class="col-md-6 col-md-offset-3"  >
+                <table><tr><td>
+                <img src="/static/images/90662.jpg" height="140" width="180" /></td><td>
+                <h2>Cloud Management Portal</h2></td>
+                </tr></table>
+        </div>
+    </div>
+<h2></h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Blueprints</a></li>
+    <li><a data-toggle="tab" href="#menu1">Deployments</a></li>
+    <div style='float:right'><a data-toggle="modal" data-target="#myModal" href="#" id="create_bluprint"  style=" cursor: pointer; "><img  style=" cursor: pointer; " class="media-object openstack" src="/static/images/icon128-2x.png" width="25" height="25" alt="profile">Create Blueprint</a></div>
+  </ul>
+
+  <div class="tab-content">
+	
+    <div id="home" class="tab-pane fade in active" style="margin-top:30px">
+
+	<div id="div1" style="display: inline-block;width:20%">
+
+
+		    <div class="tab-content" style="width:150px">
+			<div class="tab-pane active" id="comments-logout" >
+			    <ul class="media-list service-providers">
+			      <li class="media openstack">
+				<a class="pull-left" style=" cursor: pointer; ">
+				  <img class="media-object openstack" src="/static/images/openstack.png" width="100" height="100" alt="profile">
+				</a>
+			      </li>
+			      <li class="media aws"  href="#" style=" cursor: pointer; ">
+				<a class="pull-left" href="#"  style=" cursor: pointer; ">
+				 <img class="media-object aws" src="/static/images/aws-square.png" width="100" height="100" alt="profile">
+				</a>
+			      </li>
+			    </ul>
+			</div>
+			<div class="tab-pane active" id="comments-logout" >
+			    <ul class="media-list">
+			    </ul>
+			</div>
+		    </div>
+
+
+
+
+	</div>
+	<div id="div2" style="display: inline-block;float:right; width:80%">
+	</div>
+</div>
+
+
+
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+  </div>
+
+
+</div>
+
+
+[%#INCLUDE 'create_bluprint.tt2' %]
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create New Blueprint</h4>
+        </div>
+        <div class="modal-body">
+
+
+		<form id="create_blueprint" method="POST" action="/create_blueprint">
+		<div class="caption">
+		<h3></h3>
+		<tr>
+		<table class = "table table-hover">
+		<tr>
+		<td>Provider </td>
+		<td>
+		<select class="form-control icon-menu" id="provider_id" name="provider_type" data-original-title="" title="">
+		<option value="" selected="selected">Select Provider</option>
+		<option value="1">Openstack</option>
+		<!-- option value="2">AWS</option -->
+		</select>
+		</td>
+		</tr>
+		<tr>
+		<td>Instance Name</td>
+		<td><input type=text value="" name="instance_name"></td>
+		</tr>
+		<tr>
+		<td>Flavor</td>
+		<td>
+		<select class="form-control" id="id_flavor" name="flavor" data-original-title="" title="">
+		<option value="">Select flavor</option>
+		<option value="m1.tiny">m1.tiny</option>
+		<option value="m1.small">m1.small</option>
+		<option value="m1.medium">m1.medium</option>
+		<option value="m1.large">m1.large</option>
+		<option value="m1.xlarge">m1.xlarge</option>
+		</select>
+		</td>
+		</tr>
+		<tr>
+		<td>Image</td>
+		<td>
+		<select class="form-control" id="id_instance_snapshot_id" name="image" data-original-title="" title="">
+		<option value="" selected="selected">Select Snapshot</option>
+		<option value="4d962fac-49a1-4dcb-82a0-c6f1f3053739">Earth-Centos-Snapshot-1</option>
+		</select>
+		</td>
+		</tr>
+		<tr>
+		<td>Network</td>
+		<td>
+		<select class="form-control" id="id_flavor" name="network" data-original-title="" title="">
+		<option value="" selected="selected">Select Network</option>
+		<option value="d85ffdf1-4000-42ed-bbb9-d5b396df71da">demo-net</option>
+		<option value="81bafa1e-c8d2-471e-b28a-36331a66b185">ext-net</option>
+		</select>
+		<input type='hidden' name="user_id" value="[%user.id%]" />
+		</td>
+		</tr>
+		<tr>
+		<td>Key Pair</td>
+		<td>
+			<select class="form-control" id="id_keypair" name="key_pair_name" data-original-title="" title="">
+				<option value="" selected="selected">Select a key pair</option>
+				<option value="mykey">mykey</option>
+			</select>
+		</td>
+		</tr>
+		<tr>
+		<td>Security-Groups</td>
+		<td>
+			<div class="checkbox">
+			<label for="id_groups_0"><input id="id_groups_0" name="security_group" type="checkbox" value=""> coe-sec</label>
+			</div>
+			<div class="checkbox">
+			<label for="id_groups_1"><input id="id_groups_1" name="security_group" type="checkbox" value=""> default</label>
+			</div>
+		</td>
+		</tr>
+		</table>
+		<p><a href="#" id="save_bp" class="btn btn-primary" role="button">Save Blueprint</a> <a onclick="$('#create_blueprint')[0].reset();" class="btn btn-default" role="button">Reset</a></p>
+		</div>
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</body>
+</html>
+
+
+<script>
+	$(document).ready(function() { 
+		$('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'}); 
+	});
+	$('#save_bp').click(function() {
+ 		$('#create_blueprint').submit();	
+	});
+
+
+	$('.openstack').click(function(){ 
+		$('#div2').text("WELCOME TO OPENSTACK");
+	});
+
+
+
+	$('.aws').click(function(){ 
+		$('#div2').html("iWELCOME TO iAWS");
+	});
+</script>
